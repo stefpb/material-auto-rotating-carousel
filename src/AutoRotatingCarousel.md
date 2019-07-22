@@ -10,6 +10,8 @@ const Button = require('@material-ui/core/Button').default;
   <AutoRotatingCarousel
     label='Get started'
     open={state.open}
+    index={1}
+    autoplay={false}
     onClose={() => setState({ open: false })}
     onStart={() => setState({ open: false })}
     style={{ position: 'absolute' }}

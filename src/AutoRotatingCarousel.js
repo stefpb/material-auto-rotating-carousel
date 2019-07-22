@@ -121,6 +121,10 @@ class AutoRotatingCarousel extends Component {
     }, this.onChange(slideIndex))
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({ slideIndex: props.index });
+  }
+
   decreaseIndex () {
     const slideIndex = this.state.slideIndex - 1
     this.setState({
@@ -169,7 +173,7 @@ class AutoRotatingCarousel extends Component {
         containerStyle={{ height: '100%', ...containerStyle }}
         index={this.state.slideIndex}
         interval={interval}
-        onChangeIndex={this.handleChange}
+        onChangeIndex={this.handleContentChange}
         slideClassName={classes.slide}
       >
         {
@@ -230,7 +234,7 @@ class AutoRotatingCarousel extends Component {
                       [classes.dotsMobile]: mobile,
                       [classes.dotsMobileLandscape]: landscape
                     })}
-                    onDotClick={this.handleChange}
+                    onDotClick={this.handleContentChange}
                   />
                 }
               </div>
@@ -294,7 +298,8 @@ AutoRotatingCarousel.propTypes = {
   /** Controls whether the AutoRotatingCarousel is opened or not. */
   open: PropTypes.bool,
   /** If `true`, the left and right arrows are hidden in the desktop version. */
-  hideArrows: PropTypes.bool
+  hideArrows: PropTypes.bool,
+  handleChange: PropTypes.func,
 }
 
 export default withStyles(styles)(AutoRotatingCarousel)
